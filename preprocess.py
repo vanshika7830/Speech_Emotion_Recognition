@@ -19,7 +19,7 @@ def preprocess_dataset(dataset_path):
     
     # Check if dataset exists
     if not os.path.exists(dataset_path):
-        print(f"❌ Error: Folder '{dataset_path}' not found.")
+        print(f"Error: Folder '{dataset_path}' not found.")
         return
 
     print(f"--- STARTING ADVANCED PREPROCESSING ---")

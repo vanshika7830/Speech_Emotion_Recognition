@@ -4,8 +4,8 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score, classification_report
 
 # ================= CONFIGURATION =================
-TEST_SPLIT = 0.3        # Trees often need more training data
-MAX_DEPTH = None        # Try None (full tree), 10, 20 (pruned tree)
+TEST_SPLIT = 0.2     # Trees often need more training data
+MAX_DEPTH = 20       # Try None (full tree), 10, 20 (pruned tree)
 # =================================================
 
 print("--- TRAINING DECISION TREE ---")
@@ -34,3 +34,6 @@ print(f"\n✅ Decision Tree Accuracy: {acc*100:.2f}%")
 print(f"   (Max Depth: {MAX_DEPTH})")
 print("\nDetailed Report:")
 print(classification_report(y_test, preds, target_names=classes))
+
+# 0.2 No Depth = 24.38%, 0.2 10(Depth) = 23.27%, 0.2 20(Depth) = 27.15%, 0.2 30(Depth) = 24.38%
+# 0.3 No Depth = 21.40%, 0.3 10 (Depth) = 23.60%,0.3 20(Depth) = 21.40%, 0.3 30(Depth) = 21.40%

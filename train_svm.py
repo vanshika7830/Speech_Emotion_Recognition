@@ -5,8 +5,8 @@ from sklearn.metrics import accuracy_score, classification_report
 from sklearn.preprocessing import StandardScaler
 
 # ================= CONFIGURATION =================
-TEST_SPLIT = 0.2        # Try 0.2, 0.3
-KERNEL_TYPE = 'rbf'     # Try 'linear', 'poly', 'rbf'
+TEST_SPLIT = 0.2  # Try 0.2, 0.3
+KERNEL_TYPE = 'linear'     # Try 'linear', 'poly', 'rbf'
 C_VALUE = 1.0           # Try 0.1, 1.0, 10.0 (Higher = stricter margin)
 # =================================================
 
@@ -37,6 +37,8 @@ model.fit(X_train, y_train)
 preds = model.predict(X_test)
 acc = accuracy_score(y_test, preds)
 
-print(f"\n✅ SVM Accuracy: {acc*100:.2f}%")
-print(f"   (Kernel: {KERNEL_TYPE}, C: {C_VALUE})")
-print("\nDetailed Report:")
+print(f"\nSVM Accuracy: {acc*100:.2f}%")
+
+
+# 0.2 RBF = 38.50, 0.2 POLY = 26.32, 0.2 LINEAR = 33.80
+# 0.3 RBF = 36.90, 0.3 POLY = 24.54, 0.3 LINEAR = 34.50

@@ -3,10 +3,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score, classification_report
 
-# ================= CONFIGURATION =================
-TEST_SPLIT = 0.2     # Trees often need more training data
-MAX_DEPTH = 20       # Try None (full tree), 10, 20 (pruned tree)
-# =================================================
+
+TEST_SPLIT = 0.2    
+MAX_DEPTH = 20       
+
 
 print("--- TRAINING DECISION TREE ---")
 
@@ -30,7 +30,7 @@ model.fit(X_train, y_train)
 preds = model.predict(X_test)
 acc = accuracy_score(y_test, preds)
 
-print(f"\n✅ Decision Tree Accuracy: {acc*100:.2f}%")
+print(f"\nDecision Tree Accuracy: {acc*100:.2f}%")
 print(f"   (Max Depth: {MAX_DEPTH})")
 print("\nDetailed Report:")
 print(classification_report(y_test, preds, target_names=classes))

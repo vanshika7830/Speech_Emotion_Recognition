@@ -4,11 +4,10 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.preprocessing import StandardScaler
 
-# ================= CONFIGURATION =================
-TEST_SPLIT = 0.25       # Try 0.2, 0.25, 0.3
-NUM_TREES = 100         # Try 50, 100, 200
-RANDOM_STATE = 42       # Keep this fixed for reproducible results
-# =================================================
+TEST_SPLIT = 0.3     
+NUM_TREES = 250         
+RANDOM_STATE = 42       
+
 
 print("--- TRAINING RANDOM FOREST ---")
 
@@ -38,12 +37,12 @@ model.fit(X_train, y_train)
 preds = model.predict(X_test)
 acc = accuracy_score(y_test, preds)
 
-print(f"\n✅ Random Forest Accuracy: {acc*100:.2f}%")
-print(f"   (Split: {1-TEST_SPLIT}/{TEST_SPLIT}, Trees: {NUM_TREES})")
-print("\nDetailed Report:")
-print(classification_report(y_test, preds, target_names=classes))
+print(f"\nRandom Forest Accuracy: {acc*100:.2f}%")
 
 
 ''' Our baseline experiments using Random Forest and SVM achieved a maximum accuracy of 40%. 
 This limited performance suggests that flattening the temporal audio features into a 1D vector destroys critical time-dependent patterns. 
 Therefore, a Deep Learning approach (CNN/LSTM) is necessary to capture the spatial and temporal structure of the audio. '''
+
+# 0.2 100(Trees) = 38.23%, 0.2 150(Trees) = 39.34%, 0.2 200(Trees) = 41.00%, 0.2 250(Trees) = 40.72%
+# 0.3 100(Trees) = 37.64%, 0.3 150(Trees) = 38.56%, 0.3 200(Trees) = 38.75%, 0.3 250(Trees) = 38.56%

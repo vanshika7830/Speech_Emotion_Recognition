@@ -1,8 +1,10 @@
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, classification_report
+from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.preprocessing import StandardScaler
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 TEST_SPLIT = 0.3     
 NUM_TREES = 250         
@@ -34,12 +36,35 @@ model = RandomForestClassifier(n_estimators=NUM_TREES, random_state=RANDOM_STATE
 model.fit(X_train, y_train)
 
 # 5. Evaluate
-preds = model.predict(X_test)
-acc = accuracy_score(y_test, preds)
+y_pred = model.predict(X_test)
+acc = accuracy_score(y_test, y_pred)
 
 print(f"\nRandom Forest Accuracy: {acc*100:.2f}%")
+print("\nConfusion Matrix:")
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+sns.heatmap(cm, annot=True, fmt='d', cmap='Greens', xticklabels=classes, yticklabels=classes)
+plt.title(f"Confusion Matrix (Acc: {acc*100:.1f}%)")
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.show()
+# Plot 2: Feature Importance (Top 10)
+plt.figure(figsize=(8,6))
+importances = model.feature_importances_
+# Reshape to average over time (130 steps -> 33 features)
+imp_reshaped = importances.reshape(130, 33).mean(axis=0)
+indices = np.argsort(imp_reshaped)[::-1][:10] # Top 10
 
+feat_names = ([f"MFCC_{i+1}" for i in range(13)] + 
+              [f"Chroma_{i+1}" for i in range(12)] + 
+              [f"Contrast_{i+1}" for i in range(7)] + 
+              ["Bandwidth"])
+top_names = [feat_names[i] for i in indices]
 
+plt.bar(range(10), imp_reshaped[indices], color='green')
+plt.xticks(range(10), top_names, rotation=45, ha='right')
+plt.title("Top 10 Important Features")
+plt.show()
 ''' Our baseline experiments using Random Forest and SVM achieved a maximum accuracy of 40%. 
 This limited performance suggests that flattening the temporal audio features into a 1D vector destroys critical time-dependent patterns. 
 Therefore, a Deep Learning approach (CNN/LSTM) is necessary to capture the spatial and temporal structure of the audio. '''

@@ -1,2 +1,4 @@
 dataset_raw/
 *.npy
+augment_data.py
+best_cnn_model.h5

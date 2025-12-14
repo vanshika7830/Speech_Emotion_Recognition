@@ -5,7 +5,7 @@ import noisereduce as nr
 
 
 MODEL_PATH = "best_cnn_model.h5"
-TEST_FILE = "dataset_raw/angry/argument_5610_erny2_wav.mp3" # <--- Your file
+TEST_FILE = "test1.mp3" # <--- Your file
 CLASSES = np.load("classes.npy")
 
 

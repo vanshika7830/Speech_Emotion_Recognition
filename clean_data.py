@@ -5,9 +5,9 @@ import numpy as np
 
 # CONFIGURATION
 DATASET_DIR = "dataset_raw"
-MIN_DURATION = 0.5   # Seconds (Delete anything shorter)
-MAX_DURATION = 6.0   # Seconds (Delete anything longer)
-SILENCE_THRESHOLD = 0.005 # Amplitude threshold (Delete if quieter than this)
+MIN_DURATION = 0.5   
+MAX_DURATION = 6.0  
+SILENCE_THRESHOLD = 0.005 
 
 def calculate_hash(file_path):
     """Generates a digital fingerprint of the file."""
@@ -32,31 +32,29 @@ def clean_dataset():
                 
             file_path = os.path.join(root, filename)
             
-            # --- STEP 1: REMOVE DUPLICATES ---
+            # REMOVE DUPLICATES
             file_hash = calculate_hash(file_path)
             
             if file_hash in unique_hashes:
                 print(f"[DUPLICATE] Deleting {filename} (Same as {unique_hashes[file_hash]})")
                 os.remove(file_path)
                 duplicates_removed += 1
-                continue # Skip to next file
+                continue 
             else:
                 unique_hashes[file_hash] = filename
 
-            # --- STEP 2: REMOVE BAD AUDIO (Silence/Length) ---
+            # REMOVE BAD AUDIO (Silence/Length)
             try:
-                # Load audio (fast load)
+                
                 y, sr = librosa.load(file_path, sr=None)
                 duration = librosa.get_duration(y=y, sr=sr)
                 
-                # Check Duration
                 if duration < MIN_DURATION or duration > MAX_DURATION:
                     print(f"[BAD LENGTH] Deleting {filename} ({duration:.2f}s)")
                     os.remove(file_path)
                     files_removed += 1
                     continue
                 
-                # Check for Silence (RMS Energy)
                 rms = np.sqrt(np.mean(y**2))
                 if rms < SILENCE_THRESHOLD:
                     print(f"[SILENCE] Deleting {filename} (Too quiet)")

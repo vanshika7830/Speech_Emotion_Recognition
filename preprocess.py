@@ -1,14 +1,13 @@
 import os
 import librosa
 import numpy as np
-import noisereduce as nr  # pip install noisereduce
+import noisereduce as nr  
 
-# ================= CONFIGURATION =================
 DATASET_PATH = "dataset_raw"
 SAMPLE_RATE = 22050
 DURATION = 3  # Seconds
 SAMPLES_PER_TRACK = SAMPLE_RATE * DURATION
-# =================================================
+
 
 def preprocess_dataset(dataset_path):
     data = {
@@ -94,9 +93,7 @@ def preprocess_dataset(dataset_path):
     y = np.array(data["labels"])
     mapping = data["mapping"]
     
-    print("\n\n=========================================")
     print("       PREPROCESSING COMPLETE")
-    print("=========================================")
     print(f"Total Files Processed: {len(X)}")
     print(f"Feature Matrix Shape:  {X.shape}")
     print(f"   - Time Steps:       {X.shape[1]} (Should be ~130)")

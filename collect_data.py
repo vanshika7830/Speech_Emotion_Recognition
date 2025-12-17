@@ -23,7 +23,6 @@ SEARCH_TERMS = {
     "neutral":  ["counting", "reading_book", "speaking_calm", "monologue"]
 }
 
-# ================= MAIN SCRIPT =================
 
 def download_file(url, folder, filename):
     try:
@@ -91,15 +90,15 @@ def run_collection():
                             success = download_file(mp3_url, category_dir, filename)
                             if success:
                                 count += 1
-                                time.sleep(0.5) # Respect rate limits
+                                time.sleep(0.5)
                         else:
                             # File exists
                             pass
                 
-                print(f"    ✔ Saved {count} files")
+                print(f"Saved {count} files")
                 
             except Exception as e:
-                print(f"    ! Critical Error: {e}")
+                print(f"Critical Error: {e}")
 
 if __name__ == "__main__":
     run_collection()

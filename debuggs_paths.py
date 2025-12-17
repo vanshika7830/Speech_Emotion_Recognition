@@ -21,7 +21,7 @@ for root, dirs, files in os.walk(DATASET_PATH):
             print(f"   Example: {files[0]}")
         continue
 
-    # If we are here, we are inside a subfolder (Good!)
+  
     folder_name = os.path.basename(root)
     print(f"Found Class Folder: '{folder_name}' containing {len(files)} files.")
     
@@ -38,8 +38,8 @@ print("\n--- SUMMARY ---")
 if found_files == 0:
     print("FAILURE: Python found 0 valid audio files.")
 else:
-    print(f"✔ SUCCESS: Found {found_files} audio files in {found_folders} categories.")
-    print("   You can run preprocess.py now.")
+    print(f"SUCCESS: Found {found_files} audio files in {found_folders} categories.")
+    print("You can run preprocess.py now.")
 
 # Check if X_data has data or not...
 

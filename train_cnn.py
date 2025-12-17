@@ -18,8 +18,8 @@ EPOCHS     = 50
 print("Loading dataset...")
 # CHANGE THIS: Load the AUGMENTED data
 print("Loading AUGMENTED dataset...")
-X = np.load("X_data.npy")  
-y = np.load("y_data.npy")  
+X = np.load("X_data_aug.npy")  
+y = np.load("y_data_aug.npy")  
 classes = np.load("classes.npy")
 
 # 2. RESHAPE FOR CNN

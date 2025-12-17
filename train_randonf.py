@@ -26,7 +26,7 @@ X_train, X_test, y_train, y_test = train_test_split(
     X_flat, y, test_size=TEST_SPLIT, random_state=RANDOM_STATE
 )
 
-# 3. Scale (Optional for RF, but good practice)
+# 3. Scale 
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
@@ -48,6 +48,7 @@ plt.title(f"Confusion Matrix (Acc: {acc*100:.1f}%)")
 plt.xlabel('Predicted')
 plt.ylabel('Actual')
 plt.show()
+
 # Plot 2: Feature Importance (Top 10)
 plt.figure(figsize=(8,6))
 importances = model.feature_importances_

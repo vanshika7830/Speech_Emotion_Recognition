@@ -26,7 +26,7 @@ X_train, X_test, y_train, y_test = train_test_split(
     X_flat, y, test_size=TEST_SPLIT, random_state=42
 )
 
-# 3. Scale (CRITICAL for SVM)
+# 3. Scale 
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
@@ -57,7 +57,6 @@ pca = PCA(n_components=2)
 X_vis = pca.fit_transform(X_test) # Squash test data to 2D
 
 # We need to re-train a mini-SVM on just these 2 dimensions to show the boundary lines
-# (This is an approximation for visualization purposes)
 svm_2d = SVC(kernel='rbf', C=C_VALUE)
 svm_2d.fit(X_vis, y_test)
 

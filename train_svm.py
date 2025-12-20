@@ -74,9 +74,7 @@ Z = Z.reshape(xx.shape)
 # Plot contours and data points
 plt.contourf(xx, yy, Z, alpha=0.3, cmap='coolwarm')
 scatter = plt.scatter(X_vis[:, 0], X_vis[:, 1], c=y_test, cmap='coolwarm', edgecolors='k', s=20)
-plt.title("SVM Decision Boundary (PCA Projection)")
-plt.xlabel("Principal Component 1")
-plt.ylabel("Principal Component 2")
+plt.title("SVM Decision Boundary")
 
 plt.tight_layout()
 plt.show()
